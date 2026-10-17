@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font: 13px/1.5 "Microsoft YaHei", sans-serif; width: 330px; margin: 0; padding: 12px; color: #222; }
+    h1 { font-size: 15px; margin: 0 0 4px; }
+    .sub { color: #888; font-size: 12px; margin-bottom: 6px; }
+    label { display: block; margin: 8px 0 3px; font-weight: 600; }
+    input[type="time"], input[type="text"] { width: 100%; box-sizing: border-box; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; }
+    .row { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
+    button { padding: 6px 10px; border: 0; border-radius: 4px; cursor: pointer; font-size: 13px; }
+    #save { background: #1677ff; color: #fff; flex: 1; }
+    #now { background: #fe2c55; color: #fff; flex: 1; }
+    #ddBtn { width: 100%; text-align: left; background: #fff; border: 1px solid #ccc; padding: 5px 8px; }
+    .dd-panel { border: 1px solid #ddd; border-radius: 4px; margin-top: 4px; background: #fff; }
+    .dd-tools { padding: 6px 8px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 6px; }
+    .dd-tools button { font-size: 12px; padding: 2px 8px; background: #f0f0f0; }
+    #frList { max-height: 150px; overflow: auto; }
+    .fr { display: flex; align-items: center; gap: 6px; padding: 3px 8px; cursor: pointer; }
+    .fr:hover { background: #f5f7fa; }
+    .dd-note { font-size: 11px; color: #999; padding: 5px 8px; border-top: 1px solid #eee; }
+    #status { margin-top: 10px; padding: 8px; background: #f5f5f5; border-radius: 4px; white-space: pre-wrap; word-break: break-all; max-height: 130px; overflow: auto; font-size: 12px; }
+    .ok { color: #2e7d32; } .err { color: #c62828; }
+    #cnt { color: #1677ff; font-weight: 600; }
+    .tiny { font-size: 11px; color: #999; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <h1>🔥 抖音自动续火</h1>
+  <div class="sub">每天定时给多位好友发消息,维持聊天火苗</div>
+
+  <label>每天发送时间</label>
+  <input type="time" id="time" value="10:00">
+
+  <label>消息内容</label>
+  <input type="text" id="message" placeholder="test">
+
+  <label>发送对象(好友多选)</label>
+  <button id="ddBtn" type="button">选择好友…(已选 <span id="cnt">0</span> 人) ▾</button>
+  <div id="ddPanel" class="dd-panel" hidden>
+    <div class="dd-tools">
+      <button id="loadFr" type="button">🔄 从抖音会话列表拉取</button>
+      <a href="javascript:void(0)" id="selAll">全选</a> /
+      <a href="javascript:void(0)" id="selNone">清空</a>
+    </div>
+    <div id="frList"></div>
+    <div class="dd-note">好友来自抖音「消息」面板的会话列表,需要抖音网页版已登录。刷新一次后即可多选。</div>
+  </div>
+
+  <label>或手动输入(保留的原始方式)</label>
+  <input type="text" id="manual" placeholder="好友名字,多个用逗号/顿号分隔,如:潇然,小王">
+  <div class="tiny">勾选的好友与手动输入会合并,都生效。</div>
+
+  <label><input type="checkbox" id="enabled" checked> 启用每日定时</label>
+
+  <div class="row">
+    <button id="save">保存设置</button>
+    <button id="now">立即发送一次</button>
+  </div>
+  <div id="status">加载中…</div>
+  <script src="popup.js"></script>
+</body>
+</html>

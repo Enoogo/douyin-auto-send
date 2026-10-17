@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "抖音自动续火",
+  "version": "1.1.1",
+  "description": "每天定时向多个好友发送消息,自动续火(需保持抖音网页版已登录)",
+  "minimum_chrome_version": "102",
+  "permissions": ["alarms", "storage", "debugger"],
+  "host_permissions": ["https://www.douyin.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "抖音自动虚火",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.douyin.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
